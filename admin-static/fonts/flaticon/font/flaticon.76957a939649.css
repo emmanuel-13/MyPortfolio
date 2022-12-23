@@ -1,0 +1,48 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 03/07/2020 09:59
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.6f3a791b7ae8.eot");
+  src: url("./Flaticon.6f3a791b7ae8.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.e7d46927ced6.woff2") format("woff2"),
+       url("./Flaticon.2a81856f3c70.woff") format("woff"),
+       url("./Flaticon.3afa73a65930.ttf") format("truetype"),
+       url("./Flaticon.9e560d0e3cc8.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.9e560d0e3cc8.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-3d-design:before { content: "\f100"; }
+.flaticon-web-programming:before { content: "\f101"; }
+.flaticon-app-development:before { content: "\f102"; }
+.flaticon-advertising:before { content: "\f103"; }
+.flaticon-branding:before { content: "\f104"; }
+.flaticon-vector:before { content: "\f105"; }
+.flaticon-computer:before { content: "\f106"; }
+.flaticon-zoom:before { content: "\f107"; }
+.flaticon-suitcase:before { content: "\f108"; }
+.flaticon-loyalty:before { content: "\f109"; }
+.flaticon-coffee:before { content: "\f10a"; }
+.flaticon-calendar:before { content: "\f10b"; }
+.flaticon-listening:before { content: "\f10c"; }
+.flaticon-suitcases:before { content: "\f10d"; }
+.flaticon-video-player:before { content: "\f10e"; }
+.flaticon-football:before { content: "\f10f"; }
