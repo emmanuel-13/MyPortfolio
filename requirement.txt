@@ -3,3 +3,4 @@ django-ckeditor
 gunicorn
 django-jazzmin
 pillow
+whitenoise
