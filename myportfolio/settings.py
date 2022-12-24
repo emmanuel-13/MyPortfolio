@@ -9,19 +9,21 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from environs import Env
 import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = Env()
+env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+emkd&rzosilsv@7qhpv6m%#dd-s!k2(49oap(*4z*dex_7-vf'
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -224,3 +226,12 @@ EMAIL_HOST_USER = 'jackoliver023@gmail.com'
 EMAIL_HOST_PASSWORD = 'rpgbepajdzsbkwir'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+
+
+SECURE_SSL_REDIRECT = True
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_BROWSER_XSS_FILTER = True
