@@ -3,7 +3,7 @@ import threading
 from django.core.mail import EmailMessage
 from django.db import models 
 from django.db.models.signals import post_save, pre_save
-from .models import Profile, Contact
+from .models import *
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
@@ -24,7 +24,6 @@ from django.template.loader import render_to_string
 def send_emails(sender, instance, created, *args, **kwargs):
     if created:
         
-        
         email_template_name = "frontend/contact.txt"
         c = {
         "subject": instance.subject,
@@ -42,6 +41,30 @@ def send_emails(sender, instance, created, *args, **kwargs):
         mes.content_subtype = "html"
         
         EmailThread(mes).start()
+        
+
+@receiver(post_save, sender=Blog)
+def send_emails(sender, instance, created, *args, **kwargs):
+    if created:
+        
+        email_template_name = "frontend/blog.txt"
+        c = {
+        "subject": instance.title,
+        "email": settings.EMAIL_HOST_USER,
+        "content": instance.cover,
+        'site_name': 'PortFolio',
+        'protocol': 'http',
+        # "domain": "rent4less.com.ng",
+        }
+        myrender = render_to_string(email_template_name, c)
+            
+        mes = EmailMessage(instance.subject, myrender, settings.EMAIL_HOST_USER, [instance.user.email])
+        
+        mes.content_subtype = "html"
+        
+        EmailThread(mes).start()
+
+
 
 
         

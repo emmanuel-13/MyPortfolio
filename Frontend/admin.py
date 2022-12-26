@@ -10,7 +10,6 @@ class AboutInline(admin.StackedInline):
 class HobbyInline(admin.StackedInline):
     model = Hobbies
     extra = 0
-    max_num = 1
     
 
 class SkillInline(admin.StackedInline):
@@ -21,18 +20,17 @@ class SkillInline(admin.StackedInline):
 class ProjectInline(admin.StackedInline):
     model = Project
     extra = 0
-    max_num = 1
     
 
 class ProjectTypeInline(admin.StackedInline):
-    model = ProjectType
+    model = ProjectCover
     extra = 0
+    max_num = 1
     
 
 class ServiceInline(admin.StackedInline):
     model = MyServices
     extra = 0
-    max_num = 1
 
 
 class ServicesInline(admin.StackedInline):
@@ -41,22 +39,15 @@ class ServicesInline(admin.StackedInline):
     max_num = 1
     
 
+class CoverHeader(admin.StackedInline):
+    model = CoverHeader
+    extra = 0
+    
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'phone_number']
-    inlines = [AboutInline, SkillInline, HobbyInline, ProjectInline, ProjectTypeInline, ServiceInline, ServicesInline]
-    exclude = ['user']
-    
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.user = request.user
-        obj.save()
-    
-    
-
-@admin.register(Blog)
-class BlogAdmin(admin.ModelAdmin):
-    list_display = ['user', 'title', 'date_updated']
+    inlines = [CoverHeader, AboutInline, SkillInline, HobbyInline, ServiceInline, ServicesInline, ProjectTypeInline, ProjectInline]
     exclude = ['user']
     
     def save_model(self, request, obj, form, change):

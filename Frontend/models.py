@@ -8,12 +8,11 @@ from django.core.mail import send_mail
 def is_digit(value):
     if value.isdigit() == False:
         raise ValidationError('phone number must be in digit')
-
-
     
     
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='profile-image/', null=True)
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=11, validators=[is_digit])
@@ -24,10 +23,53 @@ class Profile(models.Model):
     class Meta:
         verbose_name_plural = 'My Profile'
         
+    def __str__(self):
+        return self.user.username
+        
+        
+class CoverHeader(models.Model):
+    title = models.CharField(max_length=20)
+    content = RichTextField(help_text="my content update")
+    image = models.ImageField(upload_to="my-cover/", null=False)
+    background = models.CharField(max_length=5, null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = "Background Cover"
+        
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+
+        if img.height > 450 and img.width > 500:
+            output_size = (450, 500)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+        
+    
+
+class Hobbies(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    hobby = models.CharField(max_length=20, null=False, blank=False, default="")
+    
+    def __str__(self):
+        return self.hobby
+    
+    class Meta:
+        verbose_name_plural = "Profile Hobby"
+    
+        
 
 class About(models.Model):
     about = RichTextField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.about
 
 class Skills(models.Model):
     skill = models.CharField(max_length=20, blank=False, null=False)
@@ -38,23 +80,27 @@ class Skills(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
         
+    def __str__(self):
+        return self.skill
+    
         
     class Meta:
         verbose_name_plural = 'Skill'
 
 
-class Hobbies(models.Model):
-    title = models.CharField(max_length=50, null=True, blank=False)
-    cover = RichTextField(help_text="enter brief summery of your hobbies")
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+# class Hobbies(models.Model):
+#     title = models.CharField(max_length=50, null=True, blank=False)
+#     cover = RichTextField(help_text="enter brief summery of your hobbies")
+#     icon = models.CharField(max_length=20, null=True)
+#     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+#     date_created = models.DateTimeField(auto_now_add=True)
+#     date_updated = models.DateTimeField(auto_now=True)
     
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
     
-    class Meta:
-        verbose_name_plural = 'Hobbies'
+#     class Meta:
+#         verbose_name_plural = 'Hobbies'
 
 
 class Service(models.Model):
@@ -70,23 +116,27 @@ class Service(models.Model):
 class MyServices(models.Model):
     title = models.CharField(max_length=50, null=True, blank=False)
     cover = RichTextField()
+    icon = models.CharField(max_length=50, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.user.username
+        return self.profile.user.username
     
     class Meta:
         verbose_name_plural = 'Services'
         
-class ProjectType(models.Model):
+class ProjectCover(models.Model):
     
-    project_type = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
     content = models.TextField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.title
     
     class Meta:
         verbose_name_plural = 'Project Type'
@@ -96,6 +146,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to='upload-images/', null=False, blank=False)
     name = models.CharField(max_length=20, null=True)
     content = models.TextField()
+    url = models.URLField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     
@@ -103,16 +154,16 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.images.path)
+        img = Image.open(self.image.path)
 
         if img.height > 450 and img.width > 500:
             output_size = (450, 500)
             img.thumbnail(output_size)
-            img.save(self.images.path)
+            img.save(self.image.path)
             
     
     def __str__(self):
-        return self.user.username
+        return self.profile.user.username
     
     class Meta:
         verbose_name_plural = 'Projects'
@@ -145,43 +196,17 @@ class Blog(models.Model):
     
     
 
-import time
-from django.conf import settings
-import threading
-from django.core.mail import EmailMessage
-
-class EmailThread(threading.Thread):
-    def __init__(self, mes):
-        self.mes = mes
-        threading.Thread.__init__(self)
-        
-    def run(self):
-        self.mes.send()
 
 class Contact(models.Model):
-    id = models.AutoField(primary_key=True, unique=True)
-    name = models.CharField(max_length=20, null=False, blank=False)
+    name = models.CharField(max_length=20)
     email = models.EmailField()
-    subject = models.CharField(max_length=50, null=False, blank=False)
-    content = RichTextField(help_text='please fill in your content here')
+    subject = models.CharField(max_length=50)
+    content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return str(self.id)
-    
-    # def save(self, *args, **kwargs):
-        
-    #     # send_mail(subject=self.subject, message=self.content, from_email=self.email, recipient_list=[settings.EMAIL_HOST_USER], fail_silently=True)
-    #     # time.sleep(10)
-        
-    #     mes = EmailMessage(subject=self.subject, body=self.content, from_email=self.email, to=[settings.EMAIL_HOST_USER])
-    #     EmailThread(mes).start()
-        
-    #     super().save(*args, **kwargs)
-    
-    # class Meta:
-    #     verbose_name_plural = "Contact"
+        return str(self.name)
         
         
     
