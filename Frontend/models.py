@@ -169,30 +169,30 @@ class Project(models.Model):
         verbose_name_plural = 'Projects'
     
 
-class Blog(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    images = models.ImageField(upload_to='upload-images/', null=False, blank=False)
-    title = models.CharField(max_length=50, blank=False, null=False)
-    cover = RichTextField(help_text="blog content")
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+# class Blog(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     images = models.ImageField(upload_to='upload-images/', null=False, blank=False)
+#     title = models.CharField(max_length=50, blank=False, null=False)
+#     cover = RichTextField(help_text="blog content")
+#     date_created = models.DateTimeField(auto_now_add=True)
+#     date_updated = models.DateTimeField(auto_now=True)
     
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         super().save(*args, **kwargs)
 
-        img = Image.open(self.images.path)
+#         img = Image.open(self.images.path)
 
-        if img.height > 450 and img.width > 500:
-            output_size = (450, 500)
-            img.thumbnail(output_size)
-            img.save(self.images.path)
+#         if img.height > 450 and img.width > 500:
+#             output_size = (450, 500)
+#             img.thumbnail(output_size)
+#             img.save(self.images.path)
             
             
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
     
-    class Meta:
-        verbose_name_plural = 'Blog'
+#     class Meta:
+#         verbose_name_plural = 'Blog'
     
     
 
