@@ -48,16 +48,15 @@
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">Services</h2>
           <ul class="list-unstyled">
-            {% if profile.myservices_set.all %} 
-            {% for services in profile.myservices_set.all %}
+            {% if profile.myservices_set.all %} {% for services in
+            profile.myservices_set.all %}
             <li>
               <a href="#"
-                ><span class="fa fa-chevron-right mr-2"></span>
-                {{ services.title }}</a
+                ><span class="fa fa-chevron-right mr-2"></span> {{
+                services.title }}</a
               >
             </li>
-            {% endfor %} 
-            {% else %}
+            {% endfor %} {% else %}
             <li>
               <a href="#"
                 ><span class="fa fa-chevron-right mr-2"></span>Web
@@ -98,7 +97,8 @@
               <a href="#"><span class="fa fa-twitter"></span></a>
             </li>
             <li class="ftco-animate">
-              <a href="#"><span class="fa fa-facebook"></span></a>
+              <a href="https://web.facebook.com/deco.matt.5"><span class="fa fa-facebook"></span
+              ></a>
             </li>
             <li class="ftco-animate">
               <a href="#"><span class="fa fa-instagram"></span></a>
