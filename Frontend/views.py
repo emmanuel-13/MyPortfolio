@@ -12,6 +12,14 @@ from environs import Env
 env = Env()
 env.read_env()
 
+
+def error_500(request):
+    return render(request, 'errors/500.html', status=500)
+
+
+def error_404(request, exception):
+    return render(request, 'errors/404.html', status=404)
+
 # Create your views here.
 class Home(TemplateView):
     template_name = "frontend/home.html"

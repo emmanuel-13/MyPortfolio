@@ -5,7 +5,7 @@
   id="ftco-navbar"
 >
   <div class="container">
-    <a class="navbar-brand" href="/">Solution Hub<span>.</span></a>
+    <a class="navbar-brand" href="#home-section" class="nav-link">Solution Hub<span>.</span></a>
     <button
       class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle"
       type="button"
@@ -20,9 +20,6 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav nav ml-auto">
-        <li class="nav-item">
-          <a href="#home-section" class="nav-link"><span>Home</span></a>
-        </li>
         <li class="nav-item">
           <a href="#about-section" class="nav-link"><span>About</span></a>
         </li>
@@ -41,6 +38,12 @@
         <li class="nav-item">
           <a href="#contact-section" class="nav-link"><span>Contact</span></a>
         </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="/admin/hubby" class="nav-link"><span>Admin</span></a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>
