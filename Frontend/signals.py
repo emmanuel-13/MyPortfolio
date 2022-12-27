@@ -43,29 +43,6 @@ def send_emails(sender, instance, created, *args, **kwargs):
         EmailThread(mes).start()
         
 
-@receiver(post_save, sender=Blog)
-def send_emails(sender, instance, created, *args, **kwargs):
-    if created:
-        
-        email_template_name = "frontend/blog.txt"
-        c = {
-        "subject": instance.title,
-        "email": settings.EMAIL_HOST_USER,
-        "content": instance.cover,
-        'site_name': 'PortFolio',
-        'protocol': 'http',
-        # "domain": "rent4less.com.ng",
-        }
-        myrender = render_to_string(email_template_name, c)
-            
-        mes = EmailMessage(instance.subject, myrender, settings.EMAIL_HOST_USER, [instance.user.email])
-        
-        mes.content_subtype = "html"
-        
-        EmailThread(mes).start()
-
-
-
 
         
         

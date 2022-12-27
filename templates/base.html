@@ -55,30 +55,7 @@
 
   <script src="{% static 'js/main.js' %}"></script>
 
-    <script>
-      $('#btn').click(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-          url: "{% url 'contact' %}",
-          method: "post",
-          data: {
-            names: $('names').val(), email: $('email').val(), subject: $('subject').val(), message: $('message').val()
-          },
-          success: function (data) {
-            if (data.status == 'True') {
-              alert(data.msg);
-            }
-          },
-          failure: function (data) {
-            if (data.status == "False") {
-              alert(data.msg);
-            }
-
-          }
-        })
-      })
-    </script>
+  
 
   {% endblock js %}
 </html>

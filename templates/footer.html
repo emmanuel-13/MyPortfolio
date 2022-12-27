@@ -6,10 +6,10 @@
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">Lets talk about</h2>
           <p>
-            Far far away, behind the word mountains, far from the countries
-            Vokalia and Consonantia, there live the blind texts.
+            have a project in mind and don't know how to handle some terms, we
+            are ready to give you the best for all.
           </p>
-          <p><a href="#" class="btn btn-primary">Learn more</a></p>
+          <!-- <p><a href="#" class="btn btn-primary">Learn more</a></p> -->
         </div>
       </div>
       <div class="col-md">
@@ -49,15 +49,14 @@
           <h2 class="ftco-heading-2">Services</h2>
           <ul class="list-unstyled">
             {% if profile.myservices_set.all %} 
-            
-                {% for services in profile.myservices_set.all %}
-                <li>
-                <a href="#"
-                    ><span class="fa fa-chevron-right mr-2"></span>{{ services.title }}</a
-                >
-                </li>
-                {% endfor %} 
-            
+            {% for services in profile.myservices_set.all %}
+            <li>
+              <a href="#"
+                ><span class="fa fa-chevron-right mr-2"></span>
+                {{ services.title }}</a
+              >
+            </li>
+            {% endfor %} 
             {% else %}
             <li>
               <a href="#"

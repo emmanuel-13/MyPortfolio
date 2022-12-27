@@ -6,6 +6,11 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 import requests
+from environs import Env
+
+
+env = Env()
+env.read_env()
 
 # Create your views here.
 class Home(TemplateView):
@@ -16,7 +21,7 @@ class Home(TemplateView):
         context =  super().get_context_data(**kwargs)
         context['profile'] = Profile.objects.filter(date_created__lte=timezone.now()).first()
         
-        url = ('https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=afa45a03ab58411a9c1270aaa0c1bd1f')
+        url = ('https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=') + env.str('apikey')
         response = requests.get(url)
         context['news'] = response.json()['articles'][:3]
         
