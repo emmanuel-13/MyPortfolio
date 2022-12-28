@@ -29,10 +29,7 @@ def send_emails(sender, instance, created, *args, **kwargs):
         "subject": instance.subject,
         "email": settings.EMAIL_HOST_USER,
         "new_message": instance.email,
-        "content": instance.content,
-        'site_name': 'PortFolio',
-        'protocol': 'https',
-        "domain": "https://solution-pfbp.onrender.com/",
+        "content": instance.content
         }
         myrender = render_to_string(email_template_name, c)
             
