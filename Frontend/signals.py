@@ -31,8 +31,8 @@ def send_emails(sender, instance, created, *args, **kwargs):
         "new_message": instance.email,
         "content": instance.content,
         'site_name': 'PortFolio',
-        'protocol': 'http',
-        # "domain": "rent4less.com.ng",
+        'protocol': 'https',
+        "domain": "https://solution-pfbp.onrender.com/",
         }
         myrender = render_to_string(email_template_name, c)
             
