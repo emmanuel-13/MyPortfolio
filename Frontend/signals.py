@@ -25,6 +25,8 @@ def send_emails(sender, instance, created, *args, **kwargs):
     if created:
         
         email_template_name = "frontend/contact.txt"
+        email = f'{instance.email}'
+        subject = f'{instance.subject}'
         c = {
         "subject": instance.subject,
         "email": settings.EMAIL_HOST_USER,
@@ -33,7 +35,7 @@ def send_emails(sender, instance, created, *args, **kwargs):
         }
         myrender = render_to_string(email_template_name, c)
             
-        mes = EmailMessage(instance.subject, myrender, instance.email, [settings.EMAIL_HOST_USER])
+        mes = EmailMessage(subject, myrender, email, [settings.EMAIL_HOST_USER])
         
         mes.content_subtype = "html"
         
