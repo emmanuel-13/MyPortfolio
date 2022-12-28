@@ -25,7 +25,7 @@
               <div class="text">
                 <span class="subheading">{{ cover.title }}</span>
                 <h1 class="mb-4 mt-3">
-                  {{cover.content|striptags}}
+                  {{cover.content|safe}}
                 </h1>
                 <p>
                   <a href="mailto:{{ user.email }}" class="btn btn-primary">Hire me</a>
@@ -104,7 +104,7 @@
                 </h2>
                 <p>
                   {% if profile.about_set.first %}
-                  {{ profile.about_set.first|striptags }}
+                  {{ profile.about_set.first|safe }}
 
                   {% else %}
                   No about details for now
@@ -297,7 +297,7 @@
             <div class="media-body">
               <h3 class="heading mb-3"> {{ service.title }}</h3>
               <p>
-                {{ service.cover|striptags }}
+                {{ service.cover|safe }}
               </p>
             </div>
           </div>
@@ -416,7 +416,7 @@
               <div class="text mt-3 float-right d-block">
                 <div class="d-flex align-items-center mb-3 meta">
                   <p class="mb-0">
-                    <span class="mr-2">{{ new.publishedAt }}</span>
+                    <span class="mr-2">{{ new.publishedAt}}</span>
                     <a href="#" class="mr-2">{{ new.author }}</a>
                     <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
                   </p>
@@ -562,7 +562,7 @@
               <div class="text">
                 <p>
                   <span>Email:</span>
-                  <a href="mailto:{{ user.email|urlize }}"> jackoliver023@gmail.com</a>
+                  <a href="mailto:{{ user.email }}"> jackoliver023@gmail.com </a>
                 </p>
               </div>
             </div>

@@ -6,8 +6,8 @@
         <div class="ftco-footer-widget mb-4">
           <h2 class="ftco-heading-2">Lets talk about</h2>
           <p>
-            have a project in mind and don't know how to handle some terms, we
-            are ready to give you the best for all.
+            have a project in mind and don't know how to handle some terms, i
+            am ready to give you the best in all.
           </p>
           <!-- <p><a href="#" class="btn btn-primary">Learn more</a></p> -->
         </div>
@@ -49,14 +49,13 @@
           <h2 class="ftco-heading-2">Services</h2>
           <ul class="list-unstyled">
             {% if profile.myservices_set.all %} 
-            {% for services in profile.myservices_set.all %}
-            <li>
-              <a href="#"
-                ><span class="fa fa-chevron-right mr-2"></span> {{
-                services.title }}</a
-              >
-            </li>
-            {% endfor %} {% else %}
+              {% for services in profile.myservices_set.all %}
+              <li>
+                <a href="#"><span class="fa fa-chevron-right mr-2"></span> 
+                  {{ services.title }}</a>
+              </li>
+              {% endfor %} 
+            {% else %}
             <li>
               <a href="#"
                 ><span class="fa fa-chevron-right mr-2"></span>Web
