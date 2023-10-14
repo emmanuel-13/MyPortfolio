@@ -93,6 +93,10 @@ JAZZMIN_SETTINGS = {
 
     "welcome_sign": "Welcome to My Portfolio",
 
+    "site_logo": "images/loc.png",
+
+    # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
+    "login_logo": "images/loc.png",
     # "site_logo": "asseting/img/rent4less-logo-small.png",
 
     # Copyright on the footer
