@@ -25,7 +25,7 @@
               <div class="text">
                 <span class="subheading">{{ cover.title }}</span>
                 <h1 class="mb-4 mt-3">
-                  {{cover.content|safe}}
+                  {{cover.content|safe|linebreaks}}
                 </h1>
                 <p>
                   <a href="mailto:{{ user.email }}" class="btn btn-primary">Hire me</a>
