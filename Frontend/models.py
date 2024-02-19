@@ -45,8 +45,8 @@ class CoverHeader(models.Model):
 
         img = Image.open(self.image.path)
 
-        if img.height > 450 and img.width > 500:
-            output_size = (450, 500)
+        if img.height > 300 and img.width > 300:
+            output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
         
