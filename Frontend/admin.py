@@ -64,4 +64,7 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'subject', 'date_updated']
+
+
+admin.site.register(CoverHeader)
     
