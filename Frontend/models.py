@@ -33,7 +33,8 @@ class CoverHeader(models.Model):
     image = models.ImageField(upload_to="my-cover/", null=False)
     background = models.CharField(max_length=5, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    
+    pdf = models.FileField(upload_to='upload-images/', null=False, blank=False, default="")
+
     def __str__(self):
         return self.title
     
