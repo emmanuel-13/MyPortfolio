@@ -9,8 +9,19 @@
   {% include 'navbar.html' %}
 
 <section id="home-section" class="hero">
-  {% for cover in profile.coverheader_set.all %} <div class="home-slider owl-carousel"> <div class="slider-item"> <div class="overlay"></div> <div class="container-fluid px-md-0"> <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true"> <div class="one-third order-md-last img" style="background-image: url({{cover.image.url}})"> <div class="overlay"></div> <div class="overlay-1"></div> </div> 
-  <div class="col-md-6 d-flex flex-column justify-content-center">
+  {% for cover in profile.coverheader_set.all %}
+  <div class="home-slider owl-carousel">
+    <div class="slider-item">
+      <div class="overlay"></div>
+      <div class="container-fluid px-md-0">
+        <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+
+          <div class="one-third order-md-last img" style="background-image: url({{ cover.image.url }})">
+            <div class="overlay"></div>
+            <div class="overlay-1"></div>
+          </div>
+
+          <div class="col-md-6 d-flex flex-column justify-content-center">
             <div class="text">
               <span class="subheading fw-bold fs-3 d-block mb-3">
                 {{ cover.title }}
@@ -24,9 +35,14 @@
               </p>
             </div>
           </div>
-  </div> </div> </div> </div> {% endfor %} 
 
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </section>
+
 
 
 
