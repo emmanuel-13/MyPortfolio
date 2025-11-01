@@ -9,51 +9,52 @@
   {% include 'navbar.html' %}
 
   <section id="home-section" class="hero">
-    {% for cover in profile.coverheader_set.all %}
-    <div class="home-slider owl-carousel">
-      <div class="slider-item">
-        <div class="overlay"></div>
-        <div class="container-fluid px-md-0">
-          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
-            data-scrollax-parent="true">
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-              <div 
-                class="rounded-circle border border-light shadow-lg"
-                style="
-                  background-image: url('{{ cover.image.url }}');
-                  background-size: cover;
-                  background-position: center;
-                  width: 250px;
-                  height: 250px;
-                  border: 5px solid white;
-                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                ">
-              </div>
-            </div>
-
-            <div class="one-forth d-flex align-items-center ftco-animate"
-              data-scrollax=" properties: { translateY: '70%' }">
-              <div class="text text-center">
-                <span class="subheading fw-bold fs-3">{{ cover.title }}</span>
-                <h1 class="mb-4 mt-2 fw-bolder text-dark">
-                  {{ cover.content|safe|linebreaks }}
-                </h1>
-
-                <p>
-                  <a href="mailto:{{ user.email }}" class="btn btn-primary">Hire me</a>
-                  <a href="{{ cover.pdf.url }}" class="btn btn-primary btn-outline-primary" download>
-                    Download CV
-                  </a>
-                </p>
-              </div>
+  {% for cover in profile.coverheader_set.all %}
+  <div class="home-slider owl-carousel">
+    <div class="slider-item">
+      <div class="overlay"></div>
+      <div class="container-fluid px-md-5">
+        <div class="row align-items-center justify-content-center text-center text-md-start">
+          
+          <!-- Left side: circular image -->
+          <div class="col-md-5 d-flex justify-content-center mb-4 mb-md-0">
+            <div 
+              class="rounded-circle border border-light shadow-lg"
+              style="
+                background-image: url('{{ cover.image.url }}');
+                background-size: cover;
+                background-position: center;
+                width: 250px;
+                height: 250px;
+                border: 5px solid white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+              ">
             </div>
           </div>
+
+          <!-- Right side: title + content -->
+          <div class="col-md-6 d-flex flex-column justify-content-center">
+            <div class="text">
+              <span class="subheading fw-bold fs-3 d-block mb-3">
+                {{ cover.title }}
+              </span>
+              <h1 class="mb-4 mt-2 fw-bolder text-dark" style="font-size: 2rem;">
+                {{ cover.content|safe|linebreaks }}
+              </h1>
+              <p>
+                <a href="mailto:{{ user.email }}" class="btn btn-primary me-2">Hire me</a>
+                <a href="{{ cover.pdf.url }}" class="btn btn-outline-primary" download>Download CV</a>
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
-    {% endfor %}
-  </section>
+  </div>
+  {% endfor %}
+</section>
+
 
   <section class="ftco-counter img bg-light" id="section-counter">
     <div class="container">
