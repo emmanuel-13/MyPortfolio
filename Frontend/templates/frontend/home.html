@@ -8,7 +8,6 @@
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   {% include 'navbar.html' %}
 
-  but the image and this are not side by side why
 <section id="home-section" class="hero">
     {% for cover in profile.coverheader_set.all %}
     <div class="home-slider owl-carousel">
@@ -18,18 +17,11 @@
           <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
             data-scrollax-parent="true">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
-              <div 
-                class="rounded-circle border border-light shadow-lg"
-                style="
-                  background-image: url('{{ cover.image.url }}');
-                  background-size: cover;
-                  background-position: center;
-                  width: 250px;
-                  height: 250px;
-                  border: 5px solid white;
-                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                ">
+              <div class="one-third order-md-last img" style="background-image: url({{cover.image.url}})">
+                <div class="overlay"></div>
+                <div class="overlay-1"></div>
               </div>
+
             </div>
 
             <div class="one-forth d-flex align-items-center ftco-animate"
