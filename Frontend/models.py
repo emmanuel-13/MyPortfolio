@@ -3,54 +3,47 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from PIL import Image
 from ckeditor.fields import RichTextField
-from django.core.mail import send_mail
+import os
+
 
 def is_digit(value):
-    if value.isdigit() == False:
-        raise ValidationError('phone number must be in digit')
-    
-    
+    if not value.isdigit():
+        raise ValidationError('Phone number must contain only digits')
+
+
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile-image/', null=True)
+    image = models.ImageField(upload_to='profile-image/', null=True, blank=True)
     date_of_birth = models.DateField()
     address = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=11, validators=[is_digit])
     zip_code = models.CharField(max_length=5, validators=[is_digit])
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         verbose_name_plural = 'My Profile'
-        
-    def __str__(self):
-        return self.user.username
-        
-        
-class CoverHeader(models.Model):
-    title = models.CharField(max_length=20)
-    content = RichTextField(help_text="my content update")
-    image = models.ImageField(upload_to="my-cover/", null=False)
-    background = models.CharField(max_length=5, null=True)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    pdf = models.FileField(upload_to='upload-images/', null=False, blank=False, default="")
 
     def __str__(self):
-        return self.title
-    
-    class Meta:
-        verbose_name_plural = "Background Cover"
-        
+        return self.user.username
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.image.path)
+        if self.image:
+            image_path = self.image.path
+            img = Image.open(image_path)
 
-        if img.height > 300 and img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-        
+            # Resize only if larger than 1080p
+            max_size = (1080, 1080)
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Convert to RGB if not already (avoids issues with PNG or alpha)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Save optimized with good quality
+            img.save(image_path, optimize=True, quality=90)
     
 
 class Hobbies(models.Model):
