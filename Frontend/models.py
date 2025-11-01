@@ -44,6 +44,41 @@ class Profile(models.Model):
 
             # Save optimized with good quality
             img.save(image_path, optimize=True, quality=90)
+
+        
+        
+class CoverHeader(models.Model):
+    title = models.CharField(max_length=20)
+    content = RichTextField(help_text="my content update")
+    image = models.ImageField(upload_to="my-cover/", null=False)
+    background = models.CharField(max_length=5, null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    pdf = models.FileField(upload_to='upload-images/', null=False, blank=False, default="")
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = "Background Cover"
+        
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if self.image:
+            image_path = self.image.path
+            img = Image.open(image_path)
+
+            # Resize only if larger than 1080p
+            max_size = (1080, 1080)
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Convert to RGB if not already (avoids issues with PNG or alpha)
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Save optimized with good quality
+            img.save(image_path, optimize=True, quality=90)
+
     
 
 class Hobbies(models.Model):
