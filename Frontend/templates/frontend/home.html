@@ -5,6 +5,49 @@
 
 {% block content %}
 
+
+<style>
+  /* Make hero section text very bold and readable */
+  #home-section .text h1,
+  #home-section .text .subheading {
+    font-weight: 900 !important;
+    color: #fff; /* bright text for contrast */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7); /* optional for better visibility */
+  }
+
+  /* Adjust hero background color and fit */
+  #home-section .slider-item,
+  #home-section .one-third.img {
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Add a soft overlay color to make text pop */
+  #home-section .overlay {
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Make "Hire Me" and "Download CV" buttons more prominent */
+  #home-section .btn {
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 6px;
+  }
+
+  /* Example: Apply same boldness and fit to section titles globally */
+  h2, h3, h4 {
+    font-weight: 800 !important;
+    color: #111;
+  }
+
+  section {
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+
+
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   {% include 'navbar.html' %}
 
