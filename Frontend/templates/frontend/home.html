@@ -7,81 +7,66 @@
 
 
 <style>
-  /* === HERO SECTION BACKGROUND === */
-  #home-section .slider-item,
-  #home-section .one-third.img {
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-    position: relative;
-  }
+  /* === HERO SECTION BRIGHT FIX === */
+#home-section {
+  position: relative;
+  background-color: #111;
+}
 
-  /* Dark transparent overlay to enhance contrast */
-  #home-section .overlay,
-  #home-section .overlay-1 {
-    background: rgba(0, 0, 0, 0.6) !important;
-  }
+#home-section .slider-item,
+#home-section .one-third.img {
+  background: url('your-image.jpg') center center / cover no-repeat;
+  position: relative;
+}
 
-  /* === TEXT STYLE === */
-  #home-section .text {
-    color: #ffffff !important;
-    text-align: center;
-    padding: 40px 20px;
-  }
+#home-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55); /* darkens the background for contrast */
+  z-index: 1;
+}
 
-  #home-section .text .subheading {
-    color: #ffffff !important;
-    font-weight: 900;
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-  }
+#home-section .text {
+  position: relative;
+  z-index: 2;
+  color: #fff !important;
+  text-align: center;
+}
 
-  #home-section .text h1 {
-    color: #ffffff !important;
-    font-weight: 900 !important;
-    font-size: 3.2rem;
-    line-height: 1.3;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
+#home-section .text h1,
+#home-section .text .subheading,
+#home-section .text p {
+  color: #fff !important;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
 
-  #home-section .text p {
-    color: #ffffff !important;
-    font-size: 1.1rem;
-  }
+/* Buttons */
+#home-section .btn {
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 10px 28px;
+}
 
-  /* === BUTTON STYLE === */
-  #home-section .btn {
-    font-weight: 700;
-    border-radius: 6px;
-    padding: 12px 35px;
-    transition: 0.3s;
-  }
+#home-section .btn-primary {
+  background-color: #ff6600 !important;
+  border: none;
+  color: #fff !important;
+}
 
-  #home-section .btn-primary {
-    background-color: #ff6600 !important;
-    border: none;
-    color: #ffffff !important;
-  }
+#home-section .btn-outline-primary {
+  border: 2px solid #fff !important;
+  color: #fff !important;
+  background: transparent !important;
+}
 
-  #home-section .btn-primary:hover {
-    background-color: #ff8533 !important;
-    transform: translateY(-3px);
-  }
-
-  #home-section .btn-outline-primary {
-    background: transparent !important;
-    border: 2px solid #ffffff !important;
-    color: #ffffff !important;
-  }
-
-  #home-section .btn-outline-primary:hover {
-    background: #ffffff !important;
-    color: #111 !important;
-  }
+#home-section .btn-outline-primary:hover {
+  background: #fff !important;
+  color: #111 !important;
+}
 </style>
 
 
