@@ -170,8 +170,8 @@ CKEDITOR_CONFIGS = {
 
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "flatly",
-    # "dark_mode_theme": "darkly",
+    # "theme": "flatly",
+    "dark_mode_theme": "darkly",
 
 
     "button_classes": {
