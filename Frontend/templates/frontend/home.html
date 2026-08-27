@@ -74,66 +74,67 @@
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
   {% include 'navbar.html' %}
 
-<section id="home-section" class="hero">
-
-    <div class="home-slider owl-carousel">
+<section id="home-section" class="modern-hero">
+    <div class="hero-slider owl-carousel">
 
         {% for cover in profile.coverheader_set.all %}
+        <div class="modern-slide">
 
-        <div class="slider-item">
+            <!-- Background image -->
+            <div class="hero-image"
+                 style="background-image: url('{{ cover.image.url }}');">
+            </div>
 
-            <div class="overlay"></div>
+            <!-- Content -->
+            <div class="hero-content">
+                <div class="container">
+                    <div class="row align-items-center min-vh-100">
 
-            <div class="container-fluid px-md-0">
-                <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
-                     data-scrollax-parent="true">
+                        <div class="col-lg-7 col-md-8">
+                            <div class="hero-text">
 
-                    <div class="one-third order-md-last img"
-                         style="background-image: url('{{ cover.image.url }}');">
+                                <span class="hero-subtitle">
+                                    {{ cover.title }}
+                                </span>
 
-                        <div class="overlay-1"></div>
+                                <h1>
+                                    {{ cover.content|safe }}
+                                </h1>
 
-                    </div>
+                                <p class="hero-description">
+                                    I build modern web applications, backend systems,
+                                    APIs and digital solutions using Python and modern
+                                    technologies.
+                                </p>
 
-                    <div class="one-forth d-flex align-items-center ftco-animate"
-                         data-scrollax="properties: { translateY: '70%' }">
+                                <div class="hero-buttons">
 
-                        <div class="text text-center">
+                                    <a href="mailto:{{ user.email }}"
+                                       class="hero-btn hero-btn-primary">
+                                        Hire Me
+                                    </a>
 
-                            <span class="subheading fw-bold fs-3">
-                                {{ cover.title }}
-                            </span>
+                                    {% if cover.pdf %}
+                                    <a href="{{ cover.pdf.url }}"
+                                       class="hero-btn hero-btn-outline"
+                                       download>
+                                        Download CV
+                                    </a>
+                                    {% endif %}
 
-                            <h1 class="mb-4 mt-2 fw-bolder text-white">
-                                {{ cover.content|safe }}
-                            </h1>
+                                </div>
 
-                            <p>
-                                <a href="mailto:{{ user.email }}"
-                                   class="btn btn-primary">
-                                    Hire me
-                                </a>
-
-                                <a href="{{ cover.pdf.url }}"
-                                   class="btn btn-primary btn-outline-primary"
-                                   download>
-                                    Download CV
-                                </a>
-                            </p>
-
+                            </div>
                         </div>
 
                     </div>
-
                 </div>
             </div>
 
         </div>
-
         {% endfor %}
 
     </div>
-
 </section>
 
 
